@@ -1,0 +1,14 @@
+# For PCBs designed using KiCad: https://www.kicad.org/
+# Format documentation: https://kicad.org/help/file-formats/
+
+# Copied from nguyen-v github template
+*-backups
+\#auto_saved_files#
+*.xml
+*.lib
+*.lck
+*.bak
+*.kicad_sch-bak
+fp-info-cache
+*.bck
+_autosave-*
