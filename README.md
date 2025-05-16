@@ -3,13 +3,39 @@ This repository is intended to guide the user through the design of a small Macr
 
 > Students should be guided through the material by an instructor, there's not enough info for this repository to stand on its own (yet)
 
-Quick Start
-1) Clone this repository to your local machine starting with "0_NewProject"
-2) The repository is confirgured for a 2-layer (or 4-layer) design at JLCPCB
-    - DRC is already configured
-    - Custom footprints created based on the "basic" macropad, see "west_footprints" library
-    - Custom 3d models linked to footprints to simplify enclosure design
-    - **NOTE - You main need to fix some paths when you first setup the project, as many links use ABSOLUTE not RELATIVE paths.**
+Step By Step - Creating Macropad Schematic
+-
+1) Clone this repository, or just copy WestMacropadWorkshop2025 to your local machine
+2) Open **WestMacropadWorkshop2025/west_workshop_2025.kicad_pro**
+    - This should automatically launch kicad 9
+    - If not launch kicad 9 manually, and then go *File->Open Existing Project* and navigate to the above file
+3) Double click **west_workshop_2025.kicad_sch** or launch the **Schematic Editor**
+<img src="images/kicad_home.png" alt="alt text" style="border:5px solid grey;" width="auto"/>
 
--- PENDING MORE INFO --
+4) Your screen hopfully looks like this. You should be on Kicad v9 or higher.
+<img src="images/kicad_schematic_1.png" alt="alt text" style="border:5px solid grey;" width="auto"/>
 
+5) Place your first component
+    - Navigate to the **right toolbar** and click the ***"place symbols"*** (the sidways triangle button)
+    - Your system will need to ***"load symbol libraries"*** the first time you do this... don't worry it only has to do this once
+
+6) Place the big stuff
+    - Key components have been organized into the **west_symbols libarary**, additional components related to the **advanced** macropad have not be pre configured
+    - Raspberry pi pico **@west_symbols/RaspberryPi_Pico**
+    - Key Switches **@west_symbols/RaspberryPi_Pico**
+    - Resistors **@west_symbols/Resistor**
+    - LED **@west_symbols/LED**
+    - MOSFET **@west_symbols/NMOS**
+
+7) Create the diode key matrix discussed in the workshop
+    - If you forget what that looks like, checkout the key matrix simulation using falstad ***WestMacropadWorkshop2025\design_documents\simulations***
+    - Or take a look at the reference schematic ***WestMacropadWorkshop2025\design_documents\reference_schematic.pdf***
+    - NOTE - If you're searching online you might see some schematics where the diodes are flipped compared to ours... this is because the **direction can be managed by QMK**, so long as **every diode is the same direction**
+
+8) Create the backlight driver circuit
+    - If you forget what that looks like, checkout the backlight driver simulation using falstad ***WestMacropadWorkshop2025\design_documents\simulations***
+    - Or take a look at the reference schematic ***WestMacropadWorkshop2025\design_documents\reference_schematic.pdf***
+
+9) Connect the backlight and matrix to the Pi Pico
+    - So long as you connect them to a GPIO, it doesn't matter which specific GPIO you use
+    - If you doing something more advanced such as driving a display, **BEWARE** not every GPIO is equivalent
