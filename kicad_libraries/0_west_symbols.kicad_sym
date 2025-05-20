@@ -29,7 +29,7 @@
 				)
 			)
 		)
-		(property "Footprint" "west_footprints:Kingbright_WP914x"
+		(property "Footprint" "0_west_footprints:Kingbright_WP914x"
 			(at 0 0 0)
 			(effects
 				(font
@@ -490,7 +490,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "west_footprints:RaspberryPi_Pico"
+		(property "Footprint" "0_west_footprints:RaspberryPi_Pico"
 			(at 0 -46.99 0)
 			(effects
 				(font
@@ -1636,7 +1636,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "west_footprints:SW_Cherry_MX_PCB_1.00u"
+		(property "Footprint" "0_west_footprints:SW_Cherry_MX_PCB_1.00u"
 			(at 0 5.08 0)
 			(effects
 				(font
