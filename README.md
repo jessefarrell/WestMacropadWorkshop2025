@@ -7,8 +7,9 @@ Step By Step - Creating Macropad Schematic
 -
 1) Copy WestMacropadWorkshop2025 Workshop#2 to your local machine
     - We'll learn more about github & version control later :)
-    - Download the "source code (zip)" from here the github repo -> <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/releases/tag/Workshop%232">WestMacropadWorkshop2025</a>
+    - Download the "source code (zip)" from here the github repo -> <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/releases/tag/Workshop%232-start">WestMacropadWorkshop2025</a>
     - <img src="images/download_source_step3.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
+    - Extract the contents somewhere on your machine
 
 2) Open **WestMacropadWorkshop2025/west_workshop_2025.kicad_pro**
     - This should automatically launch kicad 9
