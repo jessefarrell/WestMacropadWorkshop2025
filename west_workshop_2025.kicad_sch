@@ -12,113 +12,6 @@
 		(comment 1 "Designer: my_name")
 	)
 	(lib_symbols
-		(symbol "Connector:TestPoint"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.762)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "TP"
-				(at 0 6.858 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "TestPoint"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 5.08 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 5.08 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "test point"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "test point tp"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Pin* Test*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "TestPoint_0_1"
-				(circle
-					(center 0 3.302)
-					(radius 0.762)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "TestPoint_1_1"
-				(pin passive line
-					(at 0 0 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Mechanical:MountingHole"
 			(pin_names
 				(offset 1.016)
@@ -215,76 +108,6 @@
 		)
 		(uuid "f14fde03-e468-4ed4-a8cf-1f5448fcefd6")
 	)
-	(no_connect
-		(at 147.32 190.5)
-		(uuid "1000f9b8-97e5-4cac-822e-0a78881dd3d9")
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 147.32 190.5 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3b0ed8ec-64c9-48fb-ac33-eb72d58ca1cf")
-		(property "Reference" "TP1"
-			(at 144.018 185.42 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "JLC_Order_Number"
-			(at 144.018 187.96 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "west_footprints:JLC_Order_Number"
-			(at 147.32 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 147.32 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 147.32 190.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "aecc20a5-61d1-411c-b487-c98b869a42c6")
-		)
-		(instances
-			(project ""
-				(path "/baeebffa-96bb-43bb-bf83-a06dcef072ea"
-					(reference "TP1")
-					(unit 1)
-				)
-			)
-		)
-	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
 		(at 157.48 185.42 0)
@@ -313,7 +136,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "west_footprints:MountingHole_M2"
+		(property "Footprint" "0_west_footprints:MountingHole_M2"
 			(at 157.48 185.42 0)
 			(effects
 				(font
@@ -377,7 +200,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "west_footprints:MountingHole_M2"
+		(property "Footprint" "0_west_footprints:MountingHole_M2"
 			(at 157.48 190.5 0)
 			(effects
 				(font
@@ -441,7 +264,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "west_footprints:MountingHole_M2"
+		(property "Footprint" "0_west_footprints:MountingHole_M2"
 			(at 157.48 175.26 0)
 			(effects
 				(font
@@ -505,7 +328,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "west_footprints:MountingHole_M2"
+		(property "Footprint" "0_west_footprints:MountingHole_M2"
 			(at 157.48 180.34 0)
 			(effects
 				(font

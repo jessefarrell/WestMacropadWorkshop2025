@@ -10,25 +10,24 @@ Step By Step - Creating Macropad Schematic
     - This should automatically launch kicad 9
     - If not launch kicad 9 manually, and then go *File->Open Existing Project* and navigate to the above **kicad_pro** file
 3) Double click **west_workshop_2025.kicad_sch** or launch the **Schematic Editor**
-- <img src="images/kicad_home.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:800px;" width="100%"/>
+    - <img src="images/kicad_home.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
 
 4) Your screen hopfully looks like this. You should be on Kicad v9 or higher.
-- <img src="images/kicad_schematic_1.png" alt="KiCad v9 Schematic" style="border:5px solid grey; max-width:800px;" width="100%"/>
+    - <img src="images/kicad_schematic_1.png" alt="KiCad v9 Schematic" style="border:5px solid grey; max-width:700px;" width="100%"/>
 
-5) Import WEST libaries
-    - I've created several footprints and symbols for the core components of the basic macropad
-    - To use these symbols we need to **tell KiCad where the *libraries* are stored**
-    - Go to **preferences->manage symbol libraries**
-    - Select **add existing libary to table**, and point the tool to ***<your_path>\WestMacropadWorkshop2025\kicad_libraries\0_west_symbols.kicad_sym***
-    - <img src="images/kicad_symbol_import.png" alt="KiCad Symbol Import Tool" style="border:5px solid grey; max-width:800px;" width="100%"/>
-    - Once complete you should see "0_west_symbol" listed in the table view, hit **ok** to close the view and apply your changes
-    - We'll have to **do the same for the footprint libarary**, launch the **footprint editor** (see below)
-    - <img src="images/kicad_fp_editor.png" alt="KiCad Footprint Editor Symbol" style="border:5px solid grey; max-width:300px;" width="100%"/>
-    - Go to **preferences->manage footprint libraries**, and point the tool to ***<your_path>\WestMacropadWorkshop2025/kicad_libraries/0_west_footprints.pretty***
-    - Same as before, you should see "0_west_footprints" listed in the table view, hit **ok** to close the view and apply your changes
+5) Import WEST libaries (**Optional**)
+    - I did some work to automate this :), symbols and footprints are already configured
+    - Only **the 3D models will be missing** by default
+    - If you skip this step now you'll have to do it in workshop 3 or 4
+    - In the **PCB Editor** go **Preferences->Configure Paths...**
+    - Add the following name and path
+        - Name: KICAD_USER_3DMODEL_DIR
+        - Path: ${KIPRJMOD}\3dmodels
+    - <img src="images/kicad_path_config.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
 
 6) Place your first symbol
     - Navigate to the **right toolbar** and click the ***"place symbols"*** (the sidways triangle button)
+    - <img src="images/place_symbol_location.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
     - Your system will need to ***"load symbol libraries"*** the first time you do this... don't worry it only has to do this once
     - Find a random symbol and place it somewhere on the schematic
     - 🎉 First component placed!
@@ -36,7 +35,7 @@ Step By Step - Creating Macropad Schematic
 7) Get familiar with the symbols we'll be using (place more symbols)
     - Key components have been organized into the **west_symbols libarary**, additional components related to the **advanced** macropad have not be pre configured
     - Raspberry pi pico **@west_symbols/RaspberryPi_Pico**
-    - Key Switches **@west_symbols/RaspberryPi_Pico**
+    - Key Switches **@west_symbols/Switch_Push**
     - Resistors **@west_symbols/Resistor**
     - LED **@west_symbols/LED**
     - MOSFET **@west_symbols/NMOS**

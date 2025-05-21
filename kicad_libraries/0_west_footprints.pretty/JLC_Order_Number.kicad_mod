@@ -54,7 +54,7 @@
 			)
 		)
 	)
-	(attr smd)
+	(attr board_only exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
 	(fp_text user "JLCJLCJLCJLC"
 		(at 0 0 0)
 		(unlocked yes)
