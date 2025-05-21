@@ -1274,7 +1274,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "C:/Users/SESA694741/Documents/4_Github/WestMacropadWorkshop2025/3dmodels/Raspberry_Pi_Pico.STEP"
+	(model "${KICAD_USER_3DMODEL_DIR}/Raspberry_Pi_Pico.STEP"
 		(offset
 			(xyz 8.89 -24.13 3)
 		)

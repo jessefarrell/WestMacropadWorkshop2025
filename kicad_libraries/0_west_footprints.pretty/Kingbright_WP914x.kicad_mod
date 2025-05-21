@@ -234,10 +234,10 @@
 			(xyz -0 -0 -0)
 		)
 	)
-	(model "C:/Users/SESA694741/Documents/4_Github/WestMacropadWorkshop2025/3dmodels/Kingbright_WP914x_(Exact).STEP"
+	(model "${KICAD_USER_3DMODEL_DIR}/Kingbright_WP914x_(Exact).STEP"
 		(hide yes)
 		(offset
-			(xyz 1.3 0 2.5)
+			(xyz 1.3 0 3)
 		)
 		(scale
 			(xyz 1 1 1)

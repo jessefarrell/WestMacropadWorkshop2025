@@ -312,7 +312,7 @@
 			(xyz 0 0 0)
 		)
 	)
-	(model "C:/Users/SESA694741/Documents/4_Github/WestMacropadWorkshop2025/3dmodels/Keycap.STEP"
+	(model "${KICAD_USER_3DMODEL_DIR}/Keycap.STEP"
 		(offset
 			(xyz 0 0 12)
 		)
