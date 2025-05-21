@@ -2353,6 +2353,18 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "MCU"
+		(exclude_from_sim no)
+		(at 71.12 128.016 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+			)
+		)
+		(uuid "5e670814-7908-4e63-96c3-e75d0af77f11")
+	)
 	(text "3V3 DRIVEN"
 		(exclude_from_sim no)
 		(at 116.078 64.262 0)
