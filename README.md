@@ -8,22 +8,22 @@ Step By Step - Creating Macropad Schematic
 1) Clone this repository, or just copy WestMacropadWorkshop2025 to your local machine
 2) Open **WestMacropadWorkshop2025/west_workshop_2025.kicad_pro**
     - This should automatically launch kicad 9
-    - If not launch kicad 9 manually, and then go *File->Open Existing Project* and navigate to the above file
+    - If not launch kicad 9 manually, and then go *File->Open Existing Project* and navigate to the above **kicad_pro** file
 3) Double click **west_workshop_2025.kicad_sch** or launch the **Schematic Editor**
-<img src="images/kicad_home.png" alt="KiCad v9 Homepage" style="border:5px solid grey;" width="auto"/>
+- <img src="images/kicad_home.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:800px" width="100%"/>
 
 4) Your screen hopfully looks like this. You should be on Kicad v9 or higher.
-<img src="images/kicad_schematic_1.png" alt="KiCad v9 Schematic" style="border:5px solid grey;" width="auto"/>
+- <img src="images/kicad_schematic_1.png" alt="KiCad v9 Schematic" style="border:5px solid grey; max-width:800px" width="100%"/>
 
 5) Import WEST libaries
     - I've created several footprints and symbols for the core components of the basic macropad
     - To use these symbols we need to **tell KiCad where the *libraries* are stored**
     - Go to **preferences->manage symbol libraries**
-    - Select the **add existing libary to table**, and point the tool to ***<your_path>\WestMacropadWorkshop2025\kicad_libraries\0_west_symbols.kicad_sym***
+    - Select **add existing libary to table**, and point the tool to ***<your_path>\WestMacropadWorkshop2025\kicad_libraries\0_west_symbols.kicad_sym***
+    - <img src="images/kicad_symbol_import.png" alt="KiCad Symbol Import Tool" style="border:5px solid grey; max-width:800px" width="100%"/>
     - Once complete you should see "0_west_symbol" listed in the table view, hit **ok** to close the view and apply your changes
-    <img src="images/kicad_symbol_import.png" alt="KiCad Symbol Import Tool" style="border:5px solid grey;" width="auto"/>
     - We'll have to **do the same for the footprint libarary**, launch the **footprint editor**
-    - <img src="images/kicad_fp_editor.png" alt="KiCad Footprint Editor Symbol" style="border:5px solid grey;" width="auto"/>
+    - <img src="images/kicad_fp_editor.png" alt="KiCad Footprint Editor Symbol" style="border:5px solid grey; max-width:300px" width="100%"/>
     - Go to **preferences->manage footprint libraries**, and point the tool to ***<your_path>\WestMacropadWorkshop2025/kicad_libraries/0_west_footprints.pretty***
 
 6) Setup Symbol Libraries
