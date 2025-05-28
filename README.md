@@ -3,7 +3,7 @@ This repository is intended to guide the user through the design of a small Macr
 
 <em><strong>IMPORTANT NOTE</STRONG></em> - Bad Symbol
 -
-I made a <strong>mistake</strong> in the 0_west_symbol library provided during workshop #2. Please (u><strong>follow these steps to correct the NMOS symbol.</strong></u> If you do not complete these steps, pin 3 and 1 of the mosfet will be backwards.
+I made a <strong>mistake</strong> in the 0_west_symbol library provided during workshop #2. Please <u><strong>follow these steps to correct the NMOS symbol.</strong></u> If you do not complete these steps, pin 3 and 1 of the mosfet will be backwards.
 
 1) Download the corrected symbol library
     - Go to <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/blob/main/kicad_libraries/0_west_symbols.kicad_sym">design_documents/0_west_symbols.kicad_sym</a> in the github repo and download the file
