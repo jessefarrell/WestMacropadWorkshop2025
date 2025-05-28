@@ -1,10 +1,33 @@
 # WestMacropadWorkshop2025
-This repository is intended to guide the user through the design of a small Macropad using KiCAD for schematic capture and PCB layout, fusion 360 for enclosure design, and QMK as the foundation for firmware.
+This repository is intended to guide the user through the design of a small Macropad using KiCAD for schematic capture and PCB layout, fusion 360 for enclosure design, and QMK as the foundation for firmware. Students should be guided through the material by an instructor, there's not enough info for this repository to stand on its own (yet)
 
-> Students should be guided through the material by an instructor, there's not enough info for this repository to stand on its own (yet)
-
-Step By Step - Creating Macropad Schematic
+<em><strong>IMPORTANT NOTE</STRONG></em> - Bad Symbol
 -
+I made a <strong>mistake</strong> in the 0_west_symbol library provided during workshop #2. Please (u><strong>follow these steps to correct the NMOS symbol.</strong></u> If you do not complete these steps, pin 3 and 1 of the mosfet will be backwards.
+
+1) Download the corrected symbol library
+    - Go to <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/blob/main/kicad_libraries/0_west_symbols.kicad_sym">design_documents/0_west_symbols.kicad_sym</a> in the github repo and download the file
+    - <img src="images/download_symb_lib.png" alt="Download symbol library" style="border:5px solid grey; max-width:700px;" width="100%"/>
+2) Replace <em>0_west_symbols.kicad_sym</em> in your project
+    - Navigate to \WestMacropadWorkshop2025\kicad_libraries in your active project directory (not github)
+    - Copy the file you downloaded in step 1 into kicad_libraries
+    - Select <strong><u>replace the file in the destination</u></strong>
+    - <img src="images/replace_file.png" alt="Download symbol library" style="border:5px solid grey; max-width:400px;" width="50%"/>
+
+Workshop 3 - PCB Layout 
+-
+> PCB Workshop is primarily outlined in an external document. Several useful files for workshop 3 are stored in this repository.
+- Basic Macropad Board Outline - <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/blob/main/design_documents/Basic_PCB_outline.dxf">/design_documents/Basic_PCB_outline.dxf</a>
+    - The "dxf" file is a mechanical file that helps specify locations of critical components for the enclosure... such as key switches, the Pi Pico Development board, and screw holes
+- Backup Reference Design - <a href="">PENDING</a>
+    - Hopefully everyone is bringing in their own <em>custom</em> schematic from workshop 2... If not, students can always fall back on the reference design
+    - Download the "source code (zip)" from the above link <strong>only if you need to</strong>  
+- New Footprints - <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/kicad_libraries/0_west_footprints.pretty">kicad_libraries/0_west_footprints.pretty</a>
+    - I've added some Schneider and WEST logos to the 0_west_footprints library
+
+Workshop 2 - Schematic
+-
+> Step by step instructions to be followed during the workshop.
 1) Copy WestMacropadWorkshop2025 Workshop#2 to your local machine
     - We'll learn more about github & version control later :)
     - Download the "source code (zip)" from here the github repo -> <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/releases/tag/Workshop%232-start">WestMacropadWorkshop2025</a>
