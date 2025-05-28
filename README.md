@@ -19,9 +19,10 @@ Workshop 3 - PCB Layout
 > PCB Workshop is primarily outlined in an external document. Several useful files for workshop 3 are stored in this repository.
 - Basic Macropad Board Outline - <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/blob/main/design_documents/Basic_PCB_outline.dxf">/design_documents/Basic_PCB_outline.dxf</a>
     - The "dxf" file is a mechanical file that helps specify locations of critical components for the enclosure... such as key switches, the Pi Pico Development board, and screw holes
-- Backup Reference Design - <a href="">PENDING</a>
+- Backup Reference Design - <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/releases/tag/Workshop%233-Start">Workshop#3 - Blank PCB</a>
     - Hopefully everyone is bringing in their own <em>custom</em> schematic from workshop 2... If not, students can always fall back on the reference design
     - Download the "source code (zip)" from the above link <strong>only if you need to</strong>  
+    - <img src="images/download_source_step3.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
 - New Footprints - <a href="https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/kicad_libraries/0_west_footprints.pretty">kicad_libraries/0_west_footprints.pretty</a>
     - I've added some Schneider and WEST logos to the 0_west_footprints library
 
