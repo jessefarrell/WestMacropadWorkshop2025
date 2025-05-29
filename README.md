@@ -14,6 +14,11 @@ I made a <strong>mistake</strong> in the 0_west_symbol library provided during w
     - Select <strong><u>replace the file in the destination</u></strong>
     - <img src="images/replace_file.png" alt="Download symbol library" style="border:5px solid grey; max-width:400px;" width="50%"/>
 
+3) Check the fix was applied
+    - I'll add this step after workshop #3
+    - TLDR - you might need to right click "update symbol" on the schematic, and confirm that pin 3 is the top pin, and pin 1 is the bottom
+    - ![alt text](image-1.png)
+
 Workshop 3 - PCB Layout 
 -
 > PCB Workshop is primarily outlined in an external document. Several useful files for workshop 3 are stored in this repository.
