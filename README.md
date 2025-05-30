@@ -14,10 +14,14 @@ I made a <strong>mistake</strong> in the 0_west_symbol library provided during w
     - Select <strong><u>replace the file in the destination</u></strong>
     - <img src="images/replace_file.png" alt="Download symbol library" style="border:5px solid grey; max-width:400px;" width="50%"/>
 
-3) Check the fix was applied
-    - I'll add this step after workshop #3
-    - TLDR - you might need to right click "update symbol" on the schematic, and confirm that pin 3 is the top pin, and pin 1 is the bottom
-    - ![alt text](image-1.png)
+3) Sanity Check, & Update Symbol
+    - If you've already placed the symbol, you'll have to tell KiCad to reload it
+    - To do this <strong>*right-click*</strong> the symbol and go to "Update Symbol" The below window should pop up
+    - Select the "Update symbols matching library identifier", and then "Select All" the fields... finally hit <strong>Update</strong>
+    - <img src="images/update_sym.png" alt="Download symbol library" style="border:5px solid grey; max-width:400px;" width="50%"/>
+    - Once the symbol is updated it should look like this (see below)... pin 3 on top and pin 1 on the bottom 
+    - If you odn't see the pin numbers you can enable them using <strong>*right-click*</strong> -> Properties -> Show Pin Numbers
+    - <img src="images/nmos_fixed_pins.png" alt="Download symbol library" style="border:5px solid grey; max-width:400px;" width="50%"/>
 
 Workshop 3 - PCB Layout 
 -
