@@ -53,11 +53,16 @@ Workshop 2 - Schematic
 4) Your screen hopfully looks like this. You should be on Kicad v9 or higher.
     - <img src="images/kicad_schematic_1.png" alt="KiCad v9 Schematic" style="border:5px solid grey; max-width:700px;" width="100%"/>
 
-5) Import WEST libaries (**Optional**)
-    - I did some work to automate this :), symbols and footprints are already configured
+5) Import WEST libaries (**Optional, but Useful for 3D Visualization**)
+    - Symbols and footprints are already configured for the basic macropad
     - Only **the 3D models will be missing** by default
-    - If you skip this step now you'll have to do it in workshop 3 or 4
-    - In the **PCB Editor** go **Preferences->Configure Paths...**
+    - If you skip this step now, you may have to do it in workshop 3 or 4
+    - First we'll need to import a third party plugin to get the 3d models for the switches
+        - Launch the "Plugin and Content Manager"
+        - <img src="images/plugin_img.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
+        - Next navigate to "Repository", and "Libraries" shown below. Install the "Keyswitch Kicad Library", and then hit "Apply Pending Changes"
+        - <img src="images/plugin_install.png" alt="KiCad v9 Homepage" style="border:5px solid grey; max-width:700px;" width="100%"/>
+    - Next we're going to go back to the project homepage where we started and launch the **PCB Editor** then go **Preferences->Configure Paths...**
     - Add the following name and path
         - Name: KICAD_USER_3DMODEL_DIR
         - Path: ${KIPRJMOD}\3dmodels
