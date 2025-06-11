@@ -172,8 +172,8 @@ qmk lint -kb 0_se_west/demo3x3 -km default
 qmk compile -kb 0_se_west/demo3x3 -km default
 ```
 
-## Static Backlight (Not RGB)
-There are few different types of lighting effects you might want to use on your macropad. The following process is how I setup the “breathing” affect on the basic macropad. Note that this will not work on RGB lights, its indented for a static “dumb” LED.
+## LED Backlight (Not RGB)
+There are few different types of lighting effects you might want to use on your macropad. The following process is how I setup the “breathing” affect on the basic macropad. Note that this will not work on RGB lights, it's indented for a single colour LED.
 
 #### `keyboard.json`
 
