@@ -106,12 +106,66 @@ This guide will walk you through the process of creating and customizing your ow
 
 ---
 
+# One Key Macropad
+The easiest macropad we can make, not to mention one which requires very few components, is a single key macropad! This is an easy way to confrim that your development board (the Raspberry Pi Pico) is okay, and it helps us confirm that your build environment is working. 
+
+
+## 1) Modify the Code
+You need to modify two files to setup the single key keyboard. 
+-  `keyboard.json`
+-  `keymap.c`
+
+### 1a) Modify `keyboard.json`
+We only need to do 2 things in keyboard.json.
+1) Define the "matrix_pins"
+2) Define the "layouts"
+```json
+{
+  "matrix_pins": {
+    "cols": ["GP0"],
+    "rows": ["GP1"]
+  },
+  "layouts": {
+    "LAYOUT": {
+      "layout": [
+        { "matrix": [0, 0], "x": 0, "y": 0 }
+      ]
+    }
+  }
+}
+
+```
+
+
+### 1b) Modify `keymap.c`
+This is where we will define what the key actually does. To do this you'll need to modify the `LAYOUT`. In the example below we're modifying the key to send (`KC_ENTER`), but you can use any key you'd like.
+```c
+#include QMK_KEYBOARD_H
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [0] = LAYOUT(
+        KC_ENTER // Change to any keycode you want
+    )
+};
+
+```
+
+## 2) Compile and Test
+```bash
+qmk lint -kb 0_se_west/demo3x3 -km default
+qmk compile -kb 0_se_west/demo3x3 -km default
+```
+
+## 3) Flash the RP2040
+[See flashing instructions](#Flashing-the-RP2040)
+
+
 # Basic Macropad
 
-## Buttons / Keys
+## 1) Buttons / Keys
 There are several things that need to be changed here, and if your not using the basic macropad design we provided some of these changes will look different based on your specific design. I’ll go over each change and why we’re making the change, hopefully this will help illustrate where you might need to make changes. If you’re feeling a bit lost have a look at the example keyboard files used on the basic macropad.
 
-#### `keyboard.json`
+#### 1a) Modify `keyboard.json`
 
 * List GPIOs under `matrix_pins`
     - First let’s tell QMK which GPIO are connected to which column and row. We can do this by modifying the matrix_pins “cols” and “rows” data. For the basic macropad we used GPIO0 to GPIO5. So, we made the following change. 
@@ -148,7 +202,7 @@ There are several things that need to be changed here, and if your not using the
     ```json
     "diode_direction": "ROW2COL",
     ```
-#### `keymap.c`
+#### 1b) Modify `keymap.c`
 
 * Add functions to `LAYOUT()` as needed
     - We need to tell QMK what each of these 9keys should "do", by defining the LAYOUT in keymap.c. Have a look at the all the [keycodes available](https://docs.qmk.fm/keycodes).
@@ -161,7 +215,7 @@ There are several things that need to be changed here, and if your not using the
     )
     ```
 
-#### Compile and test:
+#### 1c) Compile and test:
 Check that everything’s "good" by running <strong>qmk lint -kb 0_se_west/demo3x3 -km default</strong> (change demo3x3 for the name of your keyboard). In my case QMK returned an error. Based on this I found I had a typo “S” in my keyboard.json file. You can actually see it in the earlier screenshots… After correcting this I get “Lint check passed!”
 
 Run the following two commands. See "Flashing the RP2040" for the next steps.
@@ -172,10 +226,10 @@ qmk lint -kb 0_se_west/demo3x3 -km default
 qmk compile -kb 0_se_west/demo3x3 -km default
 ```
 
-## Static Backlight (Not RGB)
+## 2) Static Backlight (Not RGB)
 There are few different types of lighting effects you might want to use on your macropad. The following process is how I setup the “breathing” affect on the basic macropad. Note that this will not work on RGB lights, its indented for a static “dumb” LED.
 
-#### `keyboard.json`
+#### 2a) Modify `keyboard.json`
 
 * We need to give QMK some information about our backlight. For the basic macropad that included the following changes to keyboard.json.
 - <img src="../images/backlight_json.png" alt="Backlight Settings" style="border:2px solid grey; max-width:700px;" width="100%"/>
@@ -197,7 +251,7 @@ There are few different types of lighting effects you might want to use on your 
     },
 ```
 
-#### New Supporting Files
+#### 2b) Add New Supporting Files
 
 Create these 3 files in `0_se_west/demo3x3`, paste the content into the file then save and close the file. <em>NOTE – the copyright comment is done to satisfy the linting tool.</em>
 
@@ -229,7 +283,7 @@ Create these 3 files in `0_se_west/demo3x3`, paste the content into the file the
 #define BACKLIGHT_PWM_CHANNEL RP2040_PWM_CHANNEL_A
 ```
 
-#### Compile and test:
+#### 2c) Compile and test:
 Same as before...
 Check that everything’s "good" by running <strong>qmk lint -kb 0_se_west/demo3x3 -km default</strong> (change demo3x3 for the name of your keyboard). In my case QMK returned an error. Based on this I found I had a typo “S” in my keyboard.json file. You can actually see it in the earlier screenshots… After correcting this I get “Lint check passed!”
 
