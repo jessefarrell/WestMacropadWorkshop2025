@@ -1,0 +1,48 @@
+{
+    "manufacturer": "jsallan",
+    "keyboard_name": "0_se_west/demo3x3",
+    "maintainer": "jsallan",
+    "bootloader": "rp2040",
+    "diode_direction": "ROW2COL",
+    "features": {
+		"backlight": true,
+        "bootmagic": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true
+    },
+	"backlight": {
+        "breathing": true,
+        "on_state": 1,
+        "pin": "GP6",
+        "default":{
+            "breathing":true
+        }
+    },
+    "matrix_pins": {
+        "cols": ["GP0", "GP1", "GP2"],
+        "rows": ["GP3", "GP4", "GP5"]
+    },
+    "processor": "RP2040",
+    "url": "",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x0000",
+        "vid": "0xFEED"
+    },
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"matrix": [0, 0], "x": 0, "y": 0},
+                {"matrix": [0, 1], "x": 1, "y": 0},
+                {"matrix": [0, 2], "x": 2, "y": 0},
+                {"matrix": [1, 0], "x": 0, "y": 1},
+                {"matrix": [1, 1], "x": 1, "y": 1},
+                {"matrix": [1, 2], "x": 2, "y": 1},
+                {"matrix": [2, 0], "x": 0, "y": 2},
+                {"matrix": [2, 1], "x": 1, "y": 2},
+                {"matrix": [2, 2], "x": 2, "y": 2}
+            ]
+        }
+    }
+}
