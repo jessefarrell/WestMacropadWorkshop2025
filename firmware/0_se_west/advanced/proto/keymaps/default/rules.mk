@@ -1,0 +1,9 @@
+# Rotary encoder setup
+ENCODER_ENABLE = yes
+ENCODER_MAP_ENABLE = yes
+# WS2812 RGB LED setup
+WS2812_DRIVER_REQUIRED = yes
+# OLED setup
+OLED_ENABLE = yes
+OLED_DRIVER = ssd1306
+OLED_TRANSPORT = i2c
