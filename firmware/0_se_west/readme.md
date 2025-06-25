@@ -1,0 +1,2 @@
+# Demo Software
+The files in this repository contain the firmware originally used for the basic and advanced macropads. They could benefit from some cleanup, but the code is functional. These files can be used for **references** but should not be copied directly without understanding the code. Your macropad might have slight pinout differences.
