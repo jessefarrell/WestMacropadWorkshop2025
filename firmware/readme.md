@@ -33,6 +33,7 @@
 
 [General Steps](#general-steps)
 - [Flashing the RP2040](#flashing-the-rp2040)
+- [Create a New Keyboard](#creating-a-new-keyboard)
 
 ---
 ---
@@ -108,7 +109,7 @@ The following steps are based on QMK's [setup documentation](https://docs.qmk.fm
 The easiest macropad we can make, not to mention one which requires very few components, is a single key macropad! This is an easy way to confrim that your development board (the Raspberry Pi Pico) is okay, and it helps us confirm that your build environment is working. 
 
 ## 2.1 Create Your New Keyboard
-- See [How to Setup a New QMK Keyboard]() for details.
+- See [How to Setup a New QMK Keyboard](#creating-a-new-keyboard) for details.
 
 ## 2.2 Modify the Code
 We only need to modify <strong>two files</strong> to setup the single key keyboard. These files are `keyboard.json`, and `keymap.c`.
@@ -162,7 +163,7 @@ We need to do two things in keyboard.json.
 
 
 ### 2.2.2 Modify `keymap.c`
-This is where we will define what the key actually does. To do this you'll need to modify the `LAYOUT`. In the example below we're modifying the key to send (`KC_ENTER`), but you can use any key you'd like.
+This is where we will define what the key actually does. To do this you'll need to modify the `LAYOUT`. In the example below we're modifying the key to send (`KC_A`), but you can use any key you'd like.
 
 **BEFORE**
 ```c++
@@ -182,7 +183,13 @@ This is where we will define what the key actually does. To do this you'll need 
 ```
 
 ### 2.2.3 Add Autoshift (*Optional*)
-Auto shift is a cool feature supported by QMK. If we enable the autoshift feature for our single key macropad, when we **hold down** the switch, 
+Auto shift is a cool feature supported by QMK. If we enable the autoshift feature for our single key macropad, when we **hold down** the key it will send a capitalized version of the key. So instead of `a` we should see `A` in our case.
+
+- Create a file named `rules.mk` inside your `keymaps/default` folder
+- Add the following line to that new `rules.mk` file
+```bash
+AUTO_SHIFT_ENABLE = yes
+```
 
 ## 2.3 Compile
 The keyboard name and path is just an example.
@@ -191,7 +198,7 @@ qmk compile -kb 0_se_west/<your_keyboard> -km default
 ```
 
 ## 2.4 Flash the RP2040
-Flash your Raspberry Pi Pico as per the [flashing instructions](#flashing-the-RP2040).
+Flash your Raspberry Pi Pico as per the [flashing instructions](#flashing-the-rp2040).
 
 ## 2.5 Test It!!!
 - Launch a text editor (notepad, ect)
@@ -202,14 +209,14 @@ Flash your Raspberry Pi Pico as per the [flashing instructions](#flashing-the-RP
 ---
 ---
 # 3. Basic Macropad
-The basic macropad is much more complex than the [One Key Macropad](#2-one-key-macropad). It's recommended that you test your code frequently, by [compiling]() your code and [flashing]() the RP2040.
+The basic macropad is much more complex than the [One Key Macropad](#2-one-key-macropad). It's recommended that you test your code frequently, by compiling your code and [flashing](#flashing-the-rp2040) the RP2040.
 
 The basic macropad will be designed in two steps or iterations...
 - **Iteration 1** - Adding the nine buttons, completed example -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%201/<your_keyboard>)
 - **Iteration 2** - Adding backlight support, completed example -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%202/<your_keyboard>)
 
 ## 3.1 Create Your New Keyboard
-- See [How to Setup a New QMK Keyboard]() for details.
+- See [How to Setup a New QMK Keyboard](#creating-a-new-keyboard) for details.
 
 ## 3.2 Add Buttons
 This step is similar to [2.2](#22-modify-the-code), we just have more keys... similar to before we'll need to modify two files `keyboard.json`, and `keymap.c`.
@@ -534,5 +541,35 @@ There are a few different types of lighting effects you might want to use on you
   qmk flash -kb 0_se_west/<keyboard_name> -km default
   ```
 - Instead just follow `step 2` above, and the Raspberry Pi Pico will be flashed
+
+
+## Creating a New Keyboard
+### 1. Create a New Keyboard
+
+* Navigate to `qmk_firmware/keyboards`
+* Create a new folder: `0_se_west`
+* Run the following command from QMK MSYS
+  ```bash
+  qmk new-keyboard
+  ```
+
+Enter the following when prompted:
+
+  * **Keyboard Name:** `0_se_west/<your_keyboard>` (choose a keyboard name!)
+  * **GitHub Username:** `None`            (not necassary but recommended)
+  * **Your Name:** `<your name or alias>`
+  * **Default Layout:** `65 (none of the above)`
+  * **Development Board:** `n`
+  * **Microcontroller:** `21 (rp2040)`
+  * <em> Afterwards you should see a new folder at `qmk_firmware/keyboards/0_se_west/<your_keyboard>` </em>
+
+### 2. Compile Test
+
+* Run:
+  ```bash
+  qmk compile -kb 0_se_west/<your_keyboard> -km default
+  ```
+* This will fail, but confirms the project is buidling correctly
+- <img src="../images/compile_fail.png" alt="Initial Compile Output" style="border:5px solid grey; max-width:700px;" width="100%"/>
 
 ---
