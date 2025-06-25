@@ -177,14 +177,17 @@ This is where we will define what the key actually does. To do this you'll need 
 **AFTER**
 ```c++
 [0] = LAYOUT(
-    KC_ENTER // Change to any keycode you want
+    KC_A // Change to any keycode you want
 )
 ```
+
+### 2.2.3 Add Autoshift (*Optional*)
+Auto shift is a cool feature supported by QMK. If we enable the autoshift feature for our single key macropad, when we **hold down** the switch, 
 
 ## 2.3 Compile
 The keyboard name and path is just an example.
 ```bash
-qmk compile -kb 0_se_west/demo3x3 -km default
+qmk compile -kb 0_se_west/<your_keyboard> -km default
 ```
 
 ## 2.4 Flash the RP2040
@@ -201,15 +204,16 @@ Flash your Raspberry Pi Pico as per the [flashing instructions](#flashing-the-RP
 # 3. Basic Macropad
 The basic macropad is much more complex than the [One Key Macropad](#2-one-key-macropad). It's recommended that you test your code frequently, by [compiling]() your code and [flashing]() the RP2040.
 
+The basic macropad will be designed in two steps or iterations...
+- **Iteration 1** - Adding the nine buttons, completed example -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%201/<your_keyboard>)
+- **Iteration 2** - Adding backlight support, completed example -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%202/<your_keyboard>)
+
 ## 3.1 Create Your New Keyboard
 - See [How to Setup a New QMK Keyboard]() for details.
 
 ## 3.2 Add Buttons
 This step is similar to [2.2](#22-modify-the-code), we just have more keys... similar to before we'll need to modify two files `keyboard.json`, and `keymap.c`.
 
-OLD NOTES - DELETE 
-There are several things that need to be changed here, and if you're not using the basic macropad design we provided some of these changes will look different based on your specific design. I’ll go over each change and why we’re making the change, hopefully this will help illustrate where you might need to make changes. If you’re feeling a bit lost have a look at the example keyboard files used on the basic macropad.
-OLD NOTES - DELETE 
 
 ### 3.2.1 Modify `keyboard.json`
 
@@ -289,47 +293,13 @@ OLD NOTES - DELETE
 
 #### `LAYOUT()`
 - We need to tell QMK what each of these nine keys should "do" by defining the LAYOUT in keymap.c. Have a look at the all the [keycodes available](https://docs.qmk.fm/keycodes).
-- Recommended layout
     ```C++
     [0] = LAYOUT(
-		BL_BRTG,   KC_2,   KC_3,
+		KC_1,   KC_2,   KC_3,
         KC_4,   KC_5,   KC_6,
         KC_7,   KC_8,   KC_9
     )
     ```
-- *NOTE - `BL_BRTG` on key1 will be used to toggle the backlight. A more elegant, but complex solution is shown below.*
-  ```c++
-  #include QMK_KEYBOARD_H
-
-  // define layers
-  #define _NUM 0
-  #define _BACKLIGHT 1
-
-  // define custom keycodes
-  #define KC_WEST_1 LT(_BACKLIGHT, KC_1)
-
-  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-      /*
-      * ┌───┬───┬───┐
-      * │ 7 │ 8 │ 9 │
-      * ├───┼───┼───┤
-      * │ 4 │ 5 │ 6 │
-      * ├───┼───┼───┤
-      * │ 1 │ 2 │ 3 │
-      * └───┴───┴───┘
-      */
-      [_NUM] = LAYOUT(
-          KC_WEST_1,   KC_2,   KC_3,
-          KC_4,   KC_5,   KC_6,
-          KC_7,   KC_8,   KC_9
-      ),
-      [_BACKLIGHT] = LAYOUT(
-          _______,QK_BACKLIGHT_TOGGLE,   QK_BACKLIGHT_STEP,
-          QK_BACKLIGHT_UP,   QK_BACKLIGHT_DOWN,   QK_BACKLIGHT_TOGGLE_BREATHING,
-          KC_7,   QK_BACKLIGHT_ON,   QK_BACKLIGHT_OFF
-      )
-  };
-  ```
 
 ## 3.3 Test the "Button" Feature
 
@@ -337,8 +307,7 @@ OLD NOTES - DELETE
 - Run the following two commands.
 
   ```bash
-  qmk lint -kb 0_se_west/demo3x3 -km default
-  qmk compile -kb 0_se_west/demo3x3 -km default
+  qmk compile -kb 0_se_west/<your_keyboard> -km default
   ```
 ### 3.3.2 Flash the RP2040
 - Flash your Raspberry Pi Pico as per the [flashing instructions](#flashing-the-RP2040).
@@ -353,7 +322,6 @@ There are a few different types of lighting effects you might want to use on you
 ### 3.4.1 Modify `keyboard.json`
 
 - We need to give QMK some information about our backlight. For the basic macropad that included the following changes to `keyboard.json`.
-- <img src="../images/backlight_json.png" alt="Backlight Settings" style="border:2px solid grey; max-width:700px;" width="100%"/>
 
   ```json
   "features": {
@@ -374,7 +342,44 @@ There are a few different types of lighting effects you might want to use on you
   },
   ```
 
-### 3.4.2 Add New Supporting Files
+### 3.4.2 Modify `keymap.c`
+- The following changes make it so that holding KEY1 enables the _BACKLIGHT layer
+- While holding KEY1 we can use the other keys to toggle the backlight and change its brightness
+- *NOTE - The below code replaces all the contents inside keymap.c*
+  ```c++
+  #include QMK_KEYBOARD_H
+
+  // define layers
+  #define _NUM 0
+  #define _BACKLIGHT 1
+
+  // define custom keycodes
+  #define KC_WEST_1 LT(_BACKLIGHT, KC_1)
+
+  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+      /*
+      * ┌───┬───┬───┐
+      * │ 1 │ 2 │ 3 │
+      * ├───┼───┼───┤
+      * │ 4 │ 5 │ 6 │
+      * ├───┼───┼───┤
+      * │ 7 │ 8 │ 9 │
+      * └───┴───┴───┘
+      */
+      [_NUM] = LAYOUT(
+          KC_WEST_1,   KC_2,   KC_3,
+          KC_4,   KC_5,   KC_6,
+          KC_7,   KC_8,   KC_9
+      ),
+      [_BACKLIGHT] = LAYOUT(
+          _______,QK_BACKLIGHT_TOGGLE,   QK_BACKLIGHT_STEP,
+          QK_BACKLIGHT_UP,   QK_BACKLIGHT_DOWN,   QK_BACKLIGHT_TOGGLE_BREATHING,
+          KC_7,   QK_BACKLIGHT_ON,   QK_BACKLIGHT_OFF
+      )
+  };
+  ```
+
+### 3.4.3 Add New Supporting Files
 
 - Create these 3 files in `0_se_west/<your_keyboard>`, paste the content into the file then save and close the file. <em>NOTE – the copyright comment is done to satisfy the linting tool.</em>
 - These three files are needed to configure the RP2040's PWM peripheral... it's a little clunky
@@ -518,9 +523,16 @@ There are a few different types of lighting effects you might want to use on you
     - Note, the default path is `c:/Users/<name>/qmk_firmware/.build`)
 2. Hold `BOOTSEL` (the ONLY button on the development board) and plug a USB into the Raspberry Pi Pico
 3. A new drive `RPI-RP2` should appear on your computer
-4. Drag and drop the `.uf2` file onto this drive
+4. Drag and drop the `.uf2` file into this drive
 5. The drive will auto-eject when flashing completes
 
 > **Note:** To re-flash, repeat the BOOTSEL process each time.
+
+**Other Option**
+- If your're using the `flash` command below, you don't need to manually drag the `.uf2` file into `RPI-RP2`
+  ```bash
+  qmk flash -kb 0_se_west/<keyboard_name> -km default
+  ```
+- Instead just follow `step 2` above, and the Raspberry Pi Pico will be flashed
 
 ---
