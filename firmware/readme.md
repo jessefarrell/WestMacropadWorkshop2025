@@ -102,7 +102,7 @@ This guide will walk you through the process of creating and customizing your ow
 
 ### 6. Open World!
 * At this point your project is all setup and you can start adding the features you'd like on your macropad.
-* If your strictly doing the basic macropad you can continue reading this document in order (just skip the Advanced Features section)... so follow the <strong>Buttons / Keys</strong> section, <strong>Static Backlight</strong>, and <strong>Flashing the RP2040</strong>
+* If you're strictly doing the basic macropad you can continue reading this document in order (just skip the Advanced Features section)... so follow the <strong>Buttons / Keys</strong> section, <strong>Static Backlight</strong>, and <strong>Flashing the RP2040</strong>
 
 ---
 
@@ -163,7 +163,7 @@ qmk compile -kb 0_se_west/demo3x3 -km default
 # Basic Macropad
 
 ## 1) Buttons / Keys
-There are several things that need to be changed here, and if your not using the basic macropad design we provided some of these changes will look different based on your specific design. I’ll go over each change and why we’re making the change, hopefully this will help illustrate where you might need to make changes. If you’re feeling a bit lost have a look at the example keyboard files used on the basic macropad.
+There are several things that need to be changed here, and if you're not using the basic macropad design we provided some of these changes will look different based on your specific design. I’ll go over each change and why we’re making the change, hopefully this will help illustrate where you might need to make changes. If you’re feeling a bit lost have a look at the example keyboard files used on the basic macropad.
 
 #### 1a) Modify `keyboard.json`
 
@@ -227,7 +227,7 @@ qmk compile -kb 0_se_west/demo3x3 -km default
 ```
 
 ## 2) Static Backlight (Not RGB)
-There are few different types of lighting effects you might want to use on your macropad. The following process is how I setup the “breathing” affect on the basic macropad. Note that this will not work on RGB lights, its indented for a static “dumb” LED.
+There are few different types of lighting effects you might want to use on your macropad. The following process is how I setup the “breathing” affect on the basic macropad. Note that this will not work on RGB lights, its indented for a single colour LED.
 
 #### 2a) Modify `keyboard.json`
 
