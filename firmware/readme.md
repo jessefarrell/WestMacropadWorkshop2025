@@ -243,7 +243,7 @@ This step is similar to [2.2](#22-modify-the-code), we just have more keys... si
   },
   ```
 
-#### `layouts`
+#### `layout`
 - Next modify the layouts field. This tells qmk where the keys are located on your macropad. Also notice the template QMK generated for us what 4x4 and not 3x3.
 
   **BEFORE**
@@ -392,13 +392,12 @@ There are a few different types of lighting effects you might want to use on you
 - These three files are needed to configure the RP2040's PWM peripheral... it's a little clunky
 
 
-
 **`halconf.h`**
 ```c
 // Copyright 2020 xxx
 #pragma once
-#define HAL_USE_PWM TRUE
 #include_next <halconf.h>
+#define HAL_USE_PWM TRUE
 ```
 
 **`mcuconf.h`**
@@ -416,8 +415,8 @@ There are a few different types of lighting effects you might want to use on you
 ```c
 // Copyright 2020 xxx
 #pragma once
+#include_next <config.h>
 #define BACKLIGHT_PWM_DRIVER PWMD3
-#define BACKLIGHT_PWM_CHANNEL RP2040_PWM_CHANNEL_A
 ```
 
 ## 3.5 Test the Backlight Feature
@@ -526,6 +525,10 @@ There are a few different types of lighting effects you might want to use on you
 
 ## Flashing the RP2040
 
+**Manual Upload**
+```bash
+qmk compile -kb 0_se_west/<keyboard_name> -km default
+```
 1. Locate your compiled `.uf2` file in `qmk_firmware/.build` 
     - Note, the default path is `c:/Users/<name>/qmk_firmware/.build`)
 2. Hold `BOOTSEL` (the ONLY button on the development board) and plug a USB into the Raspberry Pi Pico
@@ -533,18 +536,16 @@ There are a few different types of lighting effects you might want to use on you
 4. Drag and drop the `.uf2` file into this drive
 5. The drive will auto-eject when flashing completes
 
-> **Note:** To re-flash, repeat the BOOTSEL process each time.
 
-**Other Option**
-- If your're using the `flash` command below, you don't need to manually drag the `.uf2` file into `RPI-RP2`
-  ```bash
-  qmk flash -kb 0_se_west/<keyboard_name> -km default
-  ```
-- Instead just follow `step 2` above, and the Raspberry Pi Pico will be flashed
+**Using the Flash Command**
+```bash
+qmk flash -kb 0_se_west/<keyboard_name> -km default
+```
+1. Hold `BOOTSEL` (the ONLY button on the development board) and plug a USB into the Raspberry Pi Pico
+2. Once teh tool has finished compiling it will automatically upload your `.uf2` file to the `RPI-RP2` fodler
 
 
 ## Creating a New Keyboard
-### 1. Create a New Keyboard
 
 * Navigate to `qmk_firmware/keyboards`
 * Create a new folder: `0_se_west`
@@ -562,14 +563,4 @@ Enter the following when prompted:
   * **Development Board:** `n`
   * **Microcontroller:** `21 (rp2040)`
   * <em> Afterwards you should see a new folder at `qmk_firmware/keyboards/0_se_west/<your_keyboard>` </em>
-
-### 2. Compile Test
-
-* Run:
-  ```bash
-  qmk compile -kb 0_se_west/<your_keyboard> -km default
-  ```
-* This will fail, but confirms the project is buidling correctly
-- <img src="../images/compile_fail.png" alt="Initial Compile Output" style="border:5px solid grey; max-width:700px;" width="100%"/>
-
 ---
