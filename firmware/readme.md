@@ -6,6 +6,7 @@
 - [Document Overview](#document-overview)
 - [Helpful Links](#helpful-links)
 - [QMK Files](#qmk-files)
+- [Preliminary Setup](#preliminary-setup)
 
 [1. Setting Up QMK](#1-setting-up-qmk)
 - [1.1 Install QMK MSYS](#11-install-qmk-msys)
@@ -64,12 +65,17 @@ This guide will walk you through the process of creating and customizing your ow
   * `qmk compile -kb 0_se_west/<keyboard_name> -km default`
 
 ## QMK Files
-
 * `readme.md` – Required documentation file
 * `keyboard.json` – Used by QMK to configure your keyboard
 * `keymap.c` – Defines the keymap, ie what each button "does" on your macropad
 * `others...` – QMK projects have many more files, but the above 3x are the main ones we need to interact with regularly
 
+## Preliminary Setup
+* Enable **file name extensions** in your file explorer
+  * At times we need to rename and modify files, this requiers us to overwrite the file extensions as well... if you do not enable this feature you might inadvertently create a file "`config.h.txt`" when you meant to create "`config.h`"
+  * Instructions for [Windows 10](https://support.microsoft.com/en-us/windows/common-file-name-extensions-in-windows-da4a4430-8e76-89c5-59f7-1cdbbc75cb01)
+  * Instructions for [Windows 11](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/)
+  * Instructions for [Mac](https://support.apple.com/en-eg/guide/mac-help/mchlp2304/mac)
 ---
 ---
 # 1. Setting Up QMK
@@ -212,8 +218,10 @@ Flash your Raspberry Pi Pico as per the [flashing instructions](#flashing-the-rp
 The basic macropad is much more complex than the [One Key Macropad](#2-one-key-macropad). It's recommended that you test your code frequently, by compiling your code and [flashing](#flashing-the-rp2040) the RP2040.
 
 The basic macropad will be designed in two steps or iterations...
-- **Iteration 1** - Adding the nine buttons, completed example -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%201/<your_keyboard>)
-- **Iteration 2** - Adding backlight support, completed example -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%202/<your_keyboard>)
+- **Iteration 1** - Adding the nine buttons, completed example here -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%201/demo3x3)
+  - This is steps `3.1 to 3.3` (including all sub-sections)
+- **Iteration 2** - Adding backlight support, completed example here -> [LINK](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/FW%20files%20-%20basic%20reference%20-%20iteration%202/demo3x3)
+  - This is steps `3.4 to 3.5` (including all sub-sections)
 
 ## 3.1 Create Your New Keyboard
 - See [How to Setup a New QMK Keyboard](#creating-a-new-keyboard) for details.
@@ -311,7 +319,8 @@ This step is similar to [2.2](#22-modify-the-code), we just have more keys... si
 ## 3.3 Test the "Button" Feature
 
 #### 3.3.1 Compile:
-- Run the following two commands.
+- Run the following command. 
+- Reminder depending on where you put your keyboard you might not need the path `0_se_west`
 
   ```bash
   qmk compile -kb 0_se_west/<your_keyboard> -km default
@@ -329,6 +338,7 @@ There are a few different types of lighting effects you might want to use on you
 ### 3.4.1 Modify `keyboard.json`
 
 - We need to give QMK some information about our backlight. For the basic macropad that included the following changes to `keyboard.json`.
+- Please note that `features` already exists (we are just adding `"backlight":true,`), whereas `backlight` is a completely new item
 
   ```json
   "features": {
@@ -426,7 +436,7 @@ There are a few different types of lighting effects you might want to use on you
 ---
 ---
 # 4. Advanced Macropad Features
-- Since everyone's advanced macropad looks different, this section will be left more generic. For details on each of the features on my advanced design see sections [4.1](#41-rotary-enocders), [4.2](#42-rgb-lighting), and [4.3](#43-oled-display).
+- Since everyone's advanced macropad looks different, this section will be left more generic. For details on each of the features on our advanced design see sections [4.1](#41-rotary-encoders), [4.2](#42-rgb-lighting), and [4.3](#43-oled-display).
 - If you just want to see what **WE DID** for the advanced macropad, have a look at the [advanced macropad code](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/0_se_west/advanced).
 - As a reminder our advanced macropad included a 3x3 key matrix, a rotary encoder with an integrated button, and an OLED display which displayed the Schneider Electric logo.
 - **It is strongly recommended that you test each feature as you add them.** For example you could first check the rotary encoder works as expected, then attempt to add the RGB, and then the display (testing as you go).
@@ -510,14 +520,232 @@ There are a few different types of lighting effects you might want to use on you
 - Either method will work, though I ended up using the `rgblight` feature for my design
 - I'll document what **WE** did shortly... for now though I recommend doing some reading and referring to the [advanced macropad code](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/0_se_west/advanced)
 
-*PENDING UPDATE*
+### 4.2.1 Choose One `rgblight` or `rgb_matrix`
+- In general I'd recommend you try to make `rgb_matrix` work, but please take a look at the above documentation
+- I used the `rgblight` feature on my design because I was struggling isolating the two "zones" of my RGB using `rgb_matrix` (this is likely do-able even with `rgb_matrix` but I wasn't able to figure it out in time)
+- You cannot try to implement both features, choose one, test it, and see if it works for your keyboard
+
+### 4.2.2 `rgb_matrix` Setup
+- To enable this feature I had to modify `keyboard.json`, and `rules.mk`.
+
+**Update `keyboard.json`**
+- Under "features" add `"rgb_matrix": true,`
+```json
+"features": {
+    "bootmagic": true,
+    "command": false,
+    "console": false,
+    "extrakey": true,
+    "mousekey": true,
+    "rgb_matrix": true,
+    "nkro": true
+},
+```
+- Add the below code to keyboard.json... 
+- You might need to change the `"layout"` to match your keyboard, and you might need to change what `"pin"` is connected to your RGB LED.
+- Notice the driver we are using is `"ws2812"`, this is the RGB LED we used :)
+```json
+"rgb_matrix":{
+    "animations":{
+        "breathing": true
+    },
+    "driver":"ws2812",
+    "layout": [
+        {"matrix": [0, 0], "x": 0, "y": 0, "flags": 4},
+        {"matrix": [0, 1], "x": 112, "y": 0, "flags": 4},
+        {"matrix": [0, 2], "x": 224, "y": 0, "flags": 4},
+        {"matrix": [1, 0], "x": 0, "y": 21, "flags": 4},
+        {"matrix": [1, 1], "x": 112, "y": 21, "flags": 4},
+        {"matrix": [1, 2], "x": 224, "y": 21, "flags": 4},
+        {"matrix": [2, 0], "x": 0, "y": 42, "flags": 4},
+        {"matrix": [2, 1], "x": 112, "y": 42, "flags": 4},
+        {"matrix": [2, 2], "x": 224, "y": 42, "flags": 4}
+    ]
+
+},
+"ws2812": {
+    "pin": "GP10",      <--- CHANGE ME
+    "driver": "vendor"
+},
+```
+- I struggled to enable the RGB by default so I ended up assigning the `UG_NEXT` (underglow next) to one of the keys on my keyboard
+- This works for a quick test, but I'd recommend you try and use the layer feature like we did in [3.4.2](#342-modify-keymapc) for your final design
+
+**Update `rules.mk`**
+- Add the following line, to tell QMK to load the necessary driver
+```
+WS2812_DRIVER_REQUIRED = yes
+```
+
+### 4.2.3 `rgblight` Setup
+- In general I recommend you try to implement `rgb_matrix` instead of `rgblight`, but just for completeness I'll add some notes about `rgblight` setup below
+- I used this feature on the advanced keyboard, so if you'd like you can reference its code [here](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/0_se_west/advanced), but beware you won't be able to directly copy the code due to hardware differences
+- To setup `rgblight` I modified `keyboard.json`, `keymap.c`, and `proto.c` (my keyboards name was proto, hence proto.c)
+
+**Update `keyboard.json`**
+- Add ` "rgb_matrix": true,` under the `"features"` section. (I have some extra features enabled you might not need)
+```json
+"features": {
+    "bootmagic": true,
+    "command": false,
+    "console": false,
+    "extrakey": true,
+    "encoder": true,
+    "oled": true,
+    "mousekey": true,
+    "rgblight": true,
+    "nkro": true
+},
+```
+- Add the following to define the RGB light
+- Note several section labeled `<--- CHANGE ME`, might be different for your setup
+```json
+"rgblight":{
+    "led_count": 13,        <--- CHANGE ME
+    "animations":{
+        "breathing": true
+    },
+    "driver":"ws2812",
+    "default":{
+        "animation": "breathing",
+        "val": 255,
+        "sat": 255,
+        "hue": 64
+    }
+},
+"ws2812": {
+    "pin": "GP10",          <--- CHANGE ME
+    "driver": "vendor"
+},
+```
+
+**Update `keymap.c`**
+- On my keyboard I had two "zones", one zone was LED 0 to 9, the other was 10 to 13
+- I wanted the first zone to host various RGB animations/effects, and I wanted the second (10 to 13) to e static
+- To do this I added the following function to my `keymap.c`
+
+```c++
+void keyboard_post_init_user(void) {
+  // Manually update the defaults in keyboard.json
+  // This shouldn't technically be required, but it fixed an issue on my keyboard
+  eeconfig_update_rgblight_default();
+
+  // Set RGB effect range, LED 0 to 9
+  rgblight_set_effect_range(0, 9); 
+
+  // Apply static color to remaining LEDs
+  rgblight_setrgb_range(0, 60, 5, 9, 13);
+}
+```
+
+**Add `<keyboard_name>.c`**
+- Create a file in the same folder as `keyboard.json`, name the file `<your_keyboard_name>.c`
+- In my case my keyboard's name was `proto` so the file I created was `proto.c`
+- Add the below contents to your new file...
+
+```C++
+// Copyright 2020 xxx 
+#include "quantum.h"
+#ifdef RGBLIGHT_ENABLE
+#endif
+```
 
 ## 4.3 OLED Display
 - Review [QMK's OLED documentation](https://docs.qmk.fm/features/oled_driver), the type of display everyone should be using is an SSD1306 based 128x32 OLED
 - For the advanced design we enabled the feature by changing `config.h`, `mcuconf.h`, `keyboard.json`, `keymap.c`, and `rules.mk`.
 - I'll document what **WE** did shortly... for now though I recommend doing some reading and referring to the [advanced macropad code](https://github.com/jessefarrell/WestMacropadWorkshop2025/tree/main/firmware/0_se_west/advanced)
 
-*PENDING UPDATE*
+**Update `config.h`**
+- We need to define the driver, I2C address, display size, and we need to assign GPIO's.
+- Do this by adding the following to `config.h`... lines labeled `<--- CHANGE ME` might require modification for your system
+- Beware you can't assign SCL and SDA at a whim, reference the [RP2040 datasheet](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf) (section 1.4.3) for valid configurations
+
+```c++
+// OLED Setup
+#define I2C_DRIVER I2CD0            //<--- CHANGE ME
+#define I2C1_SCL_PIN GP13           //<--- CHANGE ME
+#define I2C1_SDA_PIN GP12           //<--- CHANGE ME
+#define OLED_DISPLAY_ADDRESS 0x3C
+#define OLED_DISPLAY_128X32
+```
+
+**Update (or create) `mcuconf.h`**
+- This is more driver configuration... there's likely some redundant setup here
+- For example we already declared `I2C_DRIVER I2CD0` in `config.h`
+```c++
+#pragma once
+
+#include_next <mcuconf.h>
+
+#undef RP_I2C_USE_I2C0
+#define RP_I2C_USE_I2C0 TRUE
+
+#undef RP_I2C_USE_I2C1
+#define RP_I2C_USE_I2C1 FALSE
+```
+
+**Update `keyboard.json`**
+- Add `"oled": true,` under the supported `features`
+- Beware, you might have some different features then me, this is just an example
+```json
+"features": {
+    "bootmagic": true,
+    "command": false,
+    "console": false,
+    "extrakey": true,
+    "encoder": true,
+    "oled": true,         <--- Add Me
+    "mousekey": true,
+    "rgb_matrix": true,
+    "nkro": true
+},
+```
+
+**Update `rules.mk`**
+- Even more driver setup!
+- Add the following to your `rules.mk` file
+```make
+# OLED setup
+OLED_ENABLE = yes
+OLED_DRIVER = ssd1306
+OLED_TRANSPORT = i2c
+```
+
+**Update `keymap.c`**
+- Here's where you get to define the actual *image* that your macropad will display
+- First we'll add the code, then I'll detail how to **convert an image** to a format QMK supports
+- Add the following to the bottom of `keymap.c`
+```c++
+static void render_logo(void) {
+  static const char PROGMEM qmk_logo[] = {
+    // Image Data Here!!!
+  };
+
+  oled_write_raw_P(qmk_logo, sizeof(qmk_logo));
+}
+
+bool oled_task_user(void) {
+  render_logo();
+  return false;
+}
+```
+- Next find an image you'd like to use (make sure it'll fit reasonably on our tiny 128x32 display)
+- We'll use [image2cpp](https://javl.github.io/image2cpp/) to help us convert our image
+1) Select Image -> **choose files** and select your desired file
+2) Image Settings -> *watch* the preview window while you make these changes
+- Canvas Size(s): 128 x 32
+- Background Color: Black
+- Invert Image Colors: *optional*
+- Scaling: scale to fit, keeping proportions
+- Brightness: play with this value until the preview looks good
+- **All other Image Settings, depend on your setup**
+3) Output
+- Code Output Format: Plain bytes
+- Draw Mode: Vertical: 1 bit per pixel (!!!REQUIRED!!!)
+4) Copy Output
+5) Paste the data into our `keymap.c` file at `// Image Data Here!!!`
+
+- Compile your project and check that the display looks correct
 
 ---
 ---
@@ -529,12 +757,15 @@ There are a few different types of lighting effects you might want to use on you
 ```bash
 qmk compile -kb 0_se_west/<keyboard_name> -km default
 ```
+> NOTE - If you didn't place your keyboard into a specific folder you can ignore the "`0_se_west/`" part of the command
+
 1. Locate your compiled `.uf2` file in `qmk_firmware/.build` 
     - Note, the default path is `c:/Users/<name>/qmk_firmware/.build`)
 2. Hold `BOOTSEL` (the ONLY button on the development board) and plug a USB into the Raspberry Pi Pico
-3. A new drive `RPI-RP2` should appear on your computer
-4. Drag and drop the `.uf2` file into this drive
-5. The drive will auto-eject when flashing completes
+3. Release `BOOTSEL`
+4. A new drive `RPI-RP2` should appear on your computer
+5. Drag and drop the `.uf2` file into this drive
+6. The drive will auto-eject when flashing completes
 
 
 **Using the Flash Command**
@@ -542,7 +773,9 @@ qmk compile -kb 0_se_west/<keyboard_name> -km default
 qmk flash -kb 0_se_west/<keyboard_name> -km default
 ```
 1. Hold `BOOTSEL` (the ONLY button on the development board) and plug a USB into the Raspberry Pi Pico
-2. Once teh tool has finished compiling it will automatically upload your `.uf2` file to the `RPI-RP2` fodler
+2. Release `BOOTSEL`
+3. The `RPI-RP2` drive should appear on your system, **no action is needed**.
+4. Once the tool has finished compiling it will automatically upload your `.uf2` file to the `RPI-RP2` folder
 
 
 ## Creating a New Keyboard
@@ -557,7 +790,7 @@ qmk flash -kb 0_se_west/<keyboard_name> -km default
 Enter the following when prompted:
 
   * **Keyboard Name:** `0_se_west/<your_keyboard>` (choose a keyboard name!)
-  * **GitHub Username:** `None`            (not necassary but recommended)
+  * **GitHub Username:** `None`            (not necessary but recommended)
   * **Your Name:** `<your name or alias>`
   * **Default Layout:** `65 (none of the above)`
   * **Development Board:** `n`
